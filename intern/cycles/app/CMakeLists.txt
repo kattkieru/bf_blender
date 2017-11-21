@@ -96,11 +96,20 @@ endmacro()
 if(WITH_CYCLES_STANDALONE)
 	set(SRC
 		cycles_standalone.cpp
+		cycles_denoising.cpp
 		cycles_xml.cpp
 		cycles_xml.h
+		cycles_standalone.h
+		cycles_denoising.h
 	)
 	add_executable(cycles ${SRC})
 	cycles_target_link_libraries(cycles)
+	target_link_libraries(
+		cycles
+		"C:/dev/blender/lib/win64_vc12/glew/lib/glew32s.lib"
+		"C:/dev/blender/lib/win64_vc12/OpenImageIO/lib/openjpeg.lib"
+	)
+
 
 	if(UNIX AND NOT APPLE)
 		set_target_properties(cycles PROPERTIES INSTALL_RPATH $ORIGIN/lib)
@@ -114,6 +123,11 @@ if(WITH_CYCLES_NETWORK)
 	)
 	add_executable(cycles_server ${SRC})
 	cycles_target_link_libraries(cycles_server)
+	target_link_libraries(
+		cycles
+		"C:/dev/blender/lib/win64_vc12/glew/lib/glew32s.lib"
+		"C:/dev/blender/lib/win64_vc12/OpenImageIO/lib/openjpeg.lib"
+	)
 
 	if(UNIX AND NOT APPLE)
 		set_target_properties(cycles_server PROPERTIES INSTALL_RPATH $ORIGIN/lib)
